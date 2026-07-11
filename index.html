@@ -24,7 +24,7 @@ fetch(sheetURL)
             let columns = rows[i].split(",");
 
             if (columns[0]) {
-                output += "<li>" + columns[0] + "</li>";
+                output += "<li><button onclick=\"showSpell('" + columns[0] + "')\">" + columns[0] + "</button></li>";
             }
 
         }
@@ -34,7 +34,9 @@ fetch(sheetURL)
         document.getElementById("spell-list").innerHTML = output;
 
     });
-
+function showSpell(spellName) {
+    alert("You selected: " + spellName);
+}
 </script>
 </body>
 </html>
