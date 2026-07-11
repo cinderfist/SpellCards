@@ -3,12 +3,38 @@
 <head>
     <title>Spell Cards</title>
 </head>
-
 <body>
+<div id="spell-list">
+    Loading spells...
+</div>
+<script>
 
-<h1>Spell Cards</h1>
+const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTizAGyLQWLge0LKAxoXBVAmF2qy3nWJRRZyGY5Z7Vi5vWJ8WFAwNppX0bPl8ESXp84QFbfwZaMtxK0/pub?gid=0&single=true&output=csv";
 
-<p>My spell card library</p>
+fetch(sheetURL)
+    .then(response => response.text())
+    .then(data => {
 
+        let rows = data.split("\n");
+
+        let output = "<ul>";
+
+        for (let i = 1; i < rows.length; i++) {
+
+            let columns = rows[i].split(",");
+
+            if (columns[0]) {
+                output += "<li>" + columns[0] + "</li>";
+            }
+
+        }
+
+        output += "</ul>";
+
+        document.getElementById("spell-list").innerHTML = output;
+
+    });
+
+</script>
 </body>
 </html>
