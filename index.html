@@ -44,10 +44,18 @@ fetch(sheetURL)
 
         document.getElementById("spell-list").innerHTML = output;
 
-function showSpell(spellname, image) {
-    document.getElementById("spell-card").innerHTML =
-        "<h2>" + spellName + "</h2>" +
-        "<img src='" + image + "' width='400'>";
+document.addEventListener("click", function(event) {
+
+    if (event.target.classList.contains("spell-button")) {
+
+        let spellName = event.target.dataset.name;
+        let image = event.target.dataset.image;
+        console.log("Spell clicked:", spellName);
+        console.log("Image value:", image);
+        document.getElementById("spell-card").innerHTML =
+            "<h2>" + spellName + "</h2>" +
+            "<img src='" + image + "' width='400'>";
+    
 }
     });
 
