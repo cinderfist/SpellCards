@@ -29,25 +29,28 @@ fetch(sheetURL)
             let columns = rows[i].split(",");
 
             if (columns[0]) {
-               let safeName = columns[0].replace(/'/g, "\\'");
-               let image = columns[3];
-               output += "<li><button onclick=\"showSpell('" + safeName + "', '" + image + "')\">" 
-               + columns[0] 
-               + "</button></li>";
-            }
+     output += "<li><button class='spell-button' data-name='" 
+        + columns[0] 
+        + "' data-image='" 
+        + columns[3] 
+        + "'>" 
+        + columns[0] 
+        + "</button></li>";
 
+}
         }
 
         output += "</ul>";
 
         document.getElementById("spell-list").innerHTML = output;
 
-    });
 function showSpell(spellname, image) {
     document.getElementById("spell-card").innerHTML =
         "<h2>" + spellName + "</h2>" +
         "<img src='" + image + "' width='400'>";
 }
+    });
+
 </script>
 </body>
 </html>
