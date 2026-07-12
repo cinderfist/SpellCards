@@ -24,7 +24,8 @@ fetch(sheetURL)
             let columns = rows[i].split(",");
 
             if (columns[0]) {
-                output += "<li><button onclick=\"showSpell('" + columns[0] + "')\">" + columns[0] + "</button></li>";
+                let safeName = columns[0].replace(/'/g, "\\'");
+                output += "<li><button onclick=\"showSpell('" + safeName + "')\">" + columns[0] + "</button></li>";
             }
 
         }
