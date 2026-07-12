@@ -7,6 +7,11 @@
 <div id="spell-list">
     Loading spells...
 </div>
+<hr>
+
+<div id="spell-card">
+    Select a spell to view the card.
+</div>
 <script>
 
 const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTizAGyLQWLge0LKAxoXBVAmF2qy3nWJRRZyGY5Z7Vi5vWJ8WFAwNppX0bPl8ESXp84QFbfwZaMtxK0/pub?gid=0&single=true&output=csv";
@@ -24,8 +29,11 @@ fetch(sheetURL)
             let columns = rows[i].split(",");
 
             if (columns[0]) {
-                let safeName = columns[0].replace(/'/g, "\\'");
-                output += "<li><button onclick=\"showSpell('" + safeName + "')\">" + columns[0] + "</button></li>";
+               let safeName = columns[0].replace(/'/g, "\\'");
+               let image = columns[3];
+               output += "<li><button onclick=\"showSpell('" + safeName + "', '" + image + "')\">" 
+               + columns[0] 
+               + "</button></li>";
             }
 
         }
@@ -35,8 +43,10 @@ fetch(sheetURL)
         document.getElementById("spell-list").innerHTML = output;
 
     });
-function showSpell(spellName) {
-    alert("You selected: " + spellName);
+function showSpell(spellName, image) {
+    document.getElementById("spell-card").innerHTML =
+        "<h2>" + spellName + "</h2>" +
+        "<img src='" + image + "' width='400'>";
 }
 </script>
 </body>
