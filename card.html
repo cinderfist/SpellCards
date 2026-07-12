@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Spell Card</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<button onclick="goBack()">← Back</button>
+
+<h1 id="spell-name">
+    Spell
+</h1>
+
+<img id="spell-image">
+
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+
+const spellName = params.get("name");
+const image = params.get("image");
+
+
+document.getElementById("spell-name").innerHTML = spellName;
+
+document.getElementById("spell-image").src = image;
+
+
+function goBack() {
+    window.history.back();
+}
+
+</script>
+
+
+</body>
+
+</html>
+
+Commit the file.
+
+Do not test it yet. It exists,
