@@ -18,19 +18,13 @@ fetch(sheetURL)
                 let spellName = columns[0];
                 let image = columns[3];
 
-                output += 
-                "<button class='spell-button' " +
-                "data-name=\"" + spellName + "\" " +
-                "data-image=\"" + image + "\">" +
-                spellName +
-                "</button><br>";
-
+               output += 
+                 "<button onclick=\"openCard('" + spellName + "', '" + image + "')\">" +
+                  spellName +
+                 "</button><br>";
             }
-
         }
-
         document.getElementById("spell-list").innerHTML = output;
-
     });
 
 
@@ -51,3 +45,10 @@ document.addEventListener("click", function(event) {
 
 });
 
+function openCard(spellName, image) {
+
+    window.location.href =
+        "card.html?name=" +
+        encodeURIComponent(spellName) +
+        "&image=" +
+        encodeURIComponent(image);  }
