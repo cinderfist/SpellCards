@@ -43,7 +43,7 @@ fetch(sheetURL)
         document.getElementById("spell-list").innerHTML = output;
 
     });
-function showSpell(spellName, image) {
+function showSpell(spell, image) {
     document.getElementById("spell-card").innerHTML =
         "<h2>" + spellName + "</h2>" +
         "<img src='" + image + "' width='400'>";
