@@ -24,7 +24,7 @@ console.log({
                     data-name="${spellName}"
                     data-image="${image}">
                     ${spellName}
-                </button><br>
+                </button>
             `;}
 
         document.getElementById("spell-list").innerHTML = output;
