@@ -14,7 +14,10 @@ fetch(sheetURL)
 
             const spellName = columns[0].trim();
             const image = columns[3].trim();
-
+console.log({
+    spellName,
+    image
+});
             output += `
                 <button
                     class="spell-button"
