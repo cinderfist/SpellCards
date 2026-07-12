@@ -1,20 +1,42 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Spell Cards</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        button {
+            font-size: 18px;
+            padding: 8px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        #spell-card img {
+            max-width: 400px;
+        }
+    </style>
+
 </head>
 <body>
+<h1>Spell Cards</h1>
 <div id="spell-list">
     Loading spells...
 </div>
 <hr>
-
 <div id="spell-card">
     Select a spell to view the card.
 </div>
+
 <script>
 
 const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTizAGyLQWLge0LKAxoXBVAmF2qy3nWJRRZyGY5Z7Vi5vWJ8WFAwNppX0bPl8ESXp84QFbfwZaMtxK0/pub?gid=0&single=true&output=csv";
+
 
 fetch(sheetURL)
     .then(response => response.text())
@@ -22,42 +44,57 @@ fetch(sheetURL)
 
         let rows = data.split("\n");
 
-        let output = "<ul>";
+        let output = "";
 
         for (let i = 1; i < rows.length; i++) {
 
             let columns = rows[i].split(",");
 
             if (columns[0]) {
-     output += "<li><button class='spell-button' data-name='" 
-        + columns[0] 
-        + "' data-image='" 
-        + columns[3] 
-        + "'>" 
-        + columns[0] 
-        + "</button></li>";
 
-}
+                let spellName = columns[0];
+                let image = columns[3];
+
+                output += 
+                "<button class='spell-button' " +
+                "data-name=\"" + spellName + "\" " +
+                "data-image=\"" + image + "\">" +
+                spellName +
+                "</button><br>";
+
+            }
+
         }
 
-        output += "</ul>";
-
         document.getElementById("spell-list").innerHTML = output;
+
+    });
+
+
 
 document.addEventListener("click", function(event) {
 
     if (event.target.classList.contains("spell-button")) {
 
-        let spellName = event.target.dataset.name;
-        let image = event.target.dataset.image;
-        console.log("Spell clicked:", spellName);
-        console.log("Image value:", image);
+        let spellName = event.target.getAttribute("data-name");
+        let image = event.target.getAttribute("data-image");
+
+
         document.getElementById("spell-card").innerHTML =
             "<h2>" + spellName + "</h2>" +
-            "<img src='" + image + "' width='400'>";
-    
-}
-    });
+            "<img src=\"" + image + "\">";
+
+    }
+
+});
+
+
+</script>
+
+
+</body>
+
+</html>
 
 </script>
 </body>
