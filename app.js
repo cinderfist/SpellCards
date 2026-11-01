@@ -5,27 +5,45 @@ fetch(sheetURL)
     .then(data => {
 
         const rows = data.split("\n");
-        let output = "";
-
-        // Skip the header row
-        for (let i = 1; i < rows.length; i++) {
-            const columns = rows[i].split(",");
-            if (!columns[0]) continue;
-
-            const spellName = columns[0].trim();
-            const image = columns[3].trim();
-console.log({
-    spellName,
-    image
+// Group spells by level
+let groups = {};
+// Skip the header row
+for (let i = 1; i < rows.length; i++) 
+{   const columns = rows[i].split(",");
+    if (!columns[0]) continue;
+    const spellName = columns[0].trim();
+    const level = columns[1].trim();
+    const image = columns[3].trim();
+    if (!groups[level]) {
+        groups[level] = [];
+    }
+    groups[level].push({
+        name: spellName,
+        image: image
+    });
+}
+// Sort levels numerically
+const sortedLevels = Object.keys(groups).sort((a, b) => {
+    return Number(a) - Number(b);
 });
-            output += `
-                <button
-                    class="spell-button"
-                    data-name="${spellName}"
-                    data-image="${image}">
-                    ${spellName}
-                </button>
-            `;}
+let output = "";
+// Create a heading and buttons for each level
+for (const level of sortedLevels) {
+    output += `
+        <h2 class="level-header">
+            Level ${level}
+        </h2>
+    `;
+    groups[level].forEach(spell => {
+        output += `
+            <button
+                class="spell-button"
+                data-name="${spell.name}"
+                data-image="${spell.image}">
+                ${spell.name}
+            </button>
+        `; });
+}
 
         document.getElementById("spell-list").innerHTML = output;
 
